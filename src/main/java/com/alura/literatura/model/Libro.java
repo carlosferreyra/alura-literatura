@@ -18,8 +18,8 @@ public class Libro {
     private String titulo;
     @OneToMany(mappedBy = "libro",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Autor> autores;
-    @ElementCollection
-    private List<String> lenguajes=new ArrayList<String>();
+    @OneToMany(mappedBy = "libro", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Lenguaje> lenguajes=new ArrayList<>();
     private Integer descargas;
 
     public Libro(){}
@@ -28,7 +28,7 @@ public class Libro {
         this.Id = datosLibro.id();
         this.titulo = datosLibro.titulo();
         this.autores = datosLibro.autores();
-        this.lenguajes = new ArrayList<>(datosLibro.lenguajes());
+        this.lenguajes = new ArrayList<Lenguaje>();
         this.descargas = datosLibro.descargas();
     }
 
@@ -48,11 +48,11 @@ public class Libro {
         this.autores = autores;
     }
 
-    public List<String> getLenguajes() {
+    public List<Lenguaje> getLenguajes() {
         return lenguajes;
     }
 
-    public void setLenguajes(List<String> lenguajes) {
+    public void setLenguajes(List<Lenguaje> lenguajes) {
         this.lenguajes = lenguajes;
     }
 
