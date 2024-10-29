@@ -2,6 +2,10 @@ package com.alura.literatura.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.OptionalInt;
+
 @Entity
 @Table(name = "autores")
 public class Autor {
@@ -12,15 +16,23 @@ public class Autor {
     private String nombre;
     private Integer nacimiento;
     private Integer muerte;
-    @ManyToOne
-    private Libro libro;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "autor", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "autor_libros",
+            joinColumns =@JoinColumn(name = "autor_id"),
+            inverseJoinColumns = @JoinColumn(name = "libro_id")
+    )
+    private List<Libro> libros;
+
+    public List<Libro> getLibros() {
+        return libros;
+    }
 
 
-    public Autor(String nombre, Libro libro, Integer nacimiento, Integer muerte) {
-        this.nombre = nombre;
-        this.libro = libro;
-        this.nacimiento = nacimiento;
-        this.muerte = muerte;
+    public Autor(DatosAutor datosAutor) {
+        this.nombre = datosAutor.nombre();
+        this.nacimiento = OptionalInt.of(datosAutor.nacimiento()).orElse(0);
+        this.muerte = OptionalInt.of(datosAutor.muerte()).orElse(0);
     }
 
     public Autor() {

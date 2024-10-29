@@ -1,6 +1,8 @@
 package com.alura.literatura.service;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -20,7 +22,10 @@ public class ConsumoAPI {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return response.body();
+        //convertir response al primer json result
+        String json = response.body();
+        return json;
+
     }
 }
 

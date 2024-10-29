@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 
 /*ARREGLAR TODA ESTA TABLA DE LA BBDD*/
@@ -16,20 +16,30 @@ public class Libro {
     private Long Id;
     @Column(unique = true)
     private String titulo;
-    @OneToMany(mappedBy = "libro",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "autores",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Autor> autores;
-    @OneToMany(mappedBy = "libro", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<Lenguaje> lenguajes=new ArrayList<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> lenguajes;
     private Integer descargas;
 
-    public Libro(){}
+    public Libro(){
+        this.lenguajes = new ArrayList<>();
+    }
 
     public Libro(DatosLibro datosLibro){
         this.Id = datosLibro.id();
         this.titulo = datosLibro.titulo();
-        this.autores = datosLibro.autores();
-        this.lenguajes = new ArrayList<Lenguaje>();
+        this.lenguajes = new ArrayList<>(datosLibro.lenguajes());
         this.descargas = datosLibro.descargas();
+    }
+    @Override
+    public String toString() {
+        return "-----Libro [id=" + Id + "]-----\n " +
+                "Titulo: '" + titulo + "',\n" +
+                "Autor/es: " + autores.stream().map(Autor::getNombre).collect(Collectors.joining("- ")) + "\n"+
+                "Lenguaje/s: " + String.join(", ", lenguajes) + "\n"+
+                "Descargas: " + descargas + "\n"+
+                "---------------";
     }
 
     public String getTitulo() {
@@ -48,11 +58,11 @@ public class Libro {
         this.autores = autores;
     }
 
-    public List<Lenguaje> getLenguajes() {
+    public List<String> getLenguajes() {
         return lenguajes;
     }
 
-    public void setLenguajes(List<Lenguaje> lenguajes) {
+    public void setLenguajes(List<String> lenguajes) {
         this.lenguajes = lenguajes;
     }
 
