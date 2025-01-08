@@ -39,6 +39,28 @@ La API de Gutendex permite obtener datos de libros y autores. La documentación 
   - Nombre: alura_literatura
   - Usuario: carlosferreyra
 
+## Capturas de Pantalla
+
+### Buscar en la API de Gutendex
+
+![Buscar en la API de Gutendex](./img/1-busqueda_api.png)
+
+### Listar Libros
+
+![Listar Libros](./img/2-listar_libros.png)
+
+### Listar Autores
+
+![Listar Autores](./img/3-listar_autores.png)
+
+### Listar Autores vivos segun año
+
+![Listar Autores vivos segun año](./img/4-listar_autores_vivos.png)
+
+### Listar Libros segun Idioma
+
+![Listar Libros segun Idioma](./img/5-listar_libros_idioma.png)
+
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
