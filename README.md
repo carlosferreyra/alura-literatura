@@ -69,6 +69,8 @@ Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo `LICENS
 
 Este proyecto es un challenge de Alura para la beca Oracle Next Education - G7.
 
+![Insignia Alura](./img/insignia_alura.png)
+
 ## Autor
 
 Carlos Eduardo Ferreyra - eduferreyraok@gmail.com - [LinkedIn](https://www.linkedin.com/in/eduferreyraok/)
